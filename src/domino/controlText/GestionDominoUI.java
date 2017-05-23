@@ -68,6 +68,7 @@ public class GestionDominoUI implements ActionListener {
                 System.out.println(fichaJugar+" ficha para jugar");
                 switch (joc.getTorn()) {
                     case 0:
+                        //AQUÍ ESTÁ EL FALLO, NO AÑADE AL ARRAY DE FICHAS JUGADAS
                         jugada.colocarUnaFitxa(joc.getJugadors()[joc.getTorn()].getFitxes().get(0), juego.orientacionFicha());
                         System.out.println("Ficha Jugada con éxito");
                         break;
