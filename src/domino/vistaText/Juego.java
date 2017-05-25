@@ -177,7 +177,7 @@ public class Juego extends javax.swing.JFrame {
         for (Fitxa f : fichasJugadas) {
             JButton b = new JButton(f.toString());
             System.out.println(f.toString());
-            ImageIcon im = new ImageIcon("F:\\Domino1\\src\\imagenes\\" + f.toString() + ".gif");
+            ImageIcon im = new ImageIcon("imagenes\\" + f.toString() + ".gif");
             b.setIcon(im);
             pCentre.add(b);
         }

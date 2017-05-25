@@ -54,7 +54,7 @@ public class GestionDominoUI implements ActionListener {
                 juego.setVisible(true);
                 opciones.setVisible(false);
                 jugada.inicial();
-                for (int i = 0; i < 2; i++) {
+                for (int i = 0; i < opciones.getNumeroJugadores(); i++) {
                     generarBotones(joc.getJugadors()[i].getFitxes(), i);
                     this.juego.imprimirBotones(i);
                 }
@@ -97,7 +97,7 @@ public class GestionDominoUI implements ActionListener {
             for (Fitxa f : fitxas) {
                 JButton b = new JButton(f.toString());
                 System.out.println(f.toString());
-                ImageIcon im = new ImageIcon("F:\\Domino1\\src\\imagenes\\" + f.toString() + ".gif");
+                ImageIcon im = new ImageIcon("imagenes\\" + f.toString() + ".gif");
                 b.setActionCommand(f.toString());
                 b.addActionListener(this);
                 b.setIcon(im);
@@ -107,7 +107,7 @@ public class GestionDominoUI implements ActionListener {
             for (Fitxa f : fitxas) {
                 JButton b = new JButton(f.toString());
                 System.out.println(f.toString());
-                ImageIcon im = new ImageIcon("F:\\Domino1\\src\\imagenes\\back.gif");
+                ImageIcon im = new ImageIcon("imagenes\\back.gif");
                 b.setActionCommand(f.toString());
                 b.setIcon(im);
                 arrayBotones.add(b);
