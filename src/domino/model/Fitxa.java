@@ -23,7 +23,8 @@ public class Fitxa {
 
     @Override
     public String toString() {
-        return valors[0] + "" + valors[1];
+        return valors[0] + "," + valors[1];
     }
+    
 
 }

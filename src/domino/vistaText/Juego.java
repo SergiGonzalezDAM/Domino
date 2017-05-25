@@ -140,6 +140,10 @@ public class Juego extends javax.swing.JFrame {
                     pnord.add(boton);
                 }
                 break;
+            case 2:
+                break;
+            case 3:
+                break;
         }
 
     }
@@ -175,9 +179,10 @@ public class Juego extends javax.swing.JFrame {
         pCentre.removeAll();
         System.out.println("Fitxes Tauler: ");
         for (Fitxa f : fichasJugadas) {
-            JButton b = new JButton(f.toString());
-            System.out.println(f.toString());
-            ImageIcon im = new ImageIcon("imagenes\\" + f.toString() + ".gif");
+            JButton b = new JButton();
+            String numeros[] = f.toString().split(",");
+            System.out.print(f.toString());
+            ImageIcon im = new ImageIcon("imagenes\\" + numeros[0] + "" + "" + numeros[1] + ".gif");
             b.setIcon(im);
             pCentre.add(b);
         }
