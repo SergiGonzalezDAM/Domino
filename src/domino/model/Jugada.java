@@ -10,23 +10,15 @@ public class Jugada {
 
     public boolean colocarUnaFitxa(Fitxa f, boolean extrem) {
         boolean correcte = false;
-        System.out.println("Estoy dentro");
         if (comprovaFitxa(f, extrem)) {
-            System.out.println("Entro en el if");
             if (extrem) {
-                System.out.println("Holi 1");
                 joc.getFitxesJugades().addFirst(f);
-                System.out.println("HOLIIIIIIII");
             } else {
-                System.out.println("Estoy en el else");
                 joc.getFitxesJugades().addLast(f);
             }
             joc.getJugadors()[joc.getTorn()].colocarFitxa(f);
             joc.setComptPassar(0);
             correcte = true;
-        }else
-        {
-            System.out.println("NO SE HA PODIDO JUGAR");
         }
         return correcte;
     }

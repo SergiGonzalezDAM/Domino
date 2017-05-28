@@ -148,25 +148,35 @@ public class Juego extends javax.swing.JFrame {
 
     }
 
-    public void actualizarFichaJugador(int numeroJugador) {
-        pSud.removeAll();
-        pnord.removeAll();
-        JButton boton;
+    public void actualizarFichaJugador(ArrayList<Fitxa> juego, int jugador, Fitxa fichaJugada) {
+
         JButton pasar = new JButton("PASAR");
         ArrayList<JButton> arrayBotones = c.getArrayBotones();
-        switch (numeroJugador) {
+        switch (jugador) {
             case 0:
-                for (int i = 0; i < arrayBotones.size(); i++) {
-                    boton = arrayBotones.get(i);
-                    pSud.add(boton);
+                //TODO FALTA HACER QUE SE ELIMINE FICHAS
+                pSud.removeAll();
+                for (int i = 0; i < juego.size(); i++) {
+                    JButton b = new JButton();
+                    String numeros[] = juego.get(i).toString().split(",");
+                    ImageIcon im = new ImageIcon("imagenes\\" + numeros[0] + "" + "" + numeros[1] + "v.gif");
+                    b.setActionCommand(juego.get(i).toString());
+                    b.addActionListener(c);
+                    b.setIcon(im);
+                    if (!fichaJugada.toString().equals(juego.get(i).toString())) {
+                        pSud.add(b);
+                    } else {
+                        c.getJugador1().remove(juego.get(i));
+                    }
                 }
                 pasar.addActionListener(c);
                 pasar.setActionCommand("Pasar");
                 pSud.add(pasar);
                 break;
             case 1:
+                pnord.removeAll();
                 for (int i = 0; i < arrayBotones.size(); i++) {
-                    boton = arrayBotones.get(i);
+                    JButton boton = arrayBotones.get(i);
                     pnord.add(boton);
                 }
                 break;
@@ -182,7 +192,7 @@ public class Juego extends javax.swing.JFrame {
             JButton b = new JButton();
             String numeros[] = f.toString().split(",");
             System.out.print(f.toString());
-            ImageIcon im = new ImageIcon("imagenes\\" + numeros[0] + "" + "" + numeros[1] + ".gif");
+            ImageIcon im = new ImageIcon("imagenes\\" + numeros[0] + "" + "" + numeros[1] + "v.gif");
             b.setIcon(im);
             pCentre.add(b);
         }

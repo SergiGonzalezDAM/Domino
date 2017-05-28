@@ -32,10 +32,14 @@ public class GestionDominoUI implements ActionListener {
     ArrayList<String> nombreJugadores;
     ArrayList<JButton> arrayBotones;
     int opcionMenu;
+    ArrayList<Fitxa> jugador1;
+    ArrayList<Fitxa> jugador2;
 
     public GestionDominoUI() {
         opciones = new Opciones(this);
         opciones.setVisible(true);
+        jugador1 = new ArrayList();
+        jugador2 = new ArrayList();
     }
 
     @Override
@@ -66,13 +70,17 @@ public class GestionDominoUI implements ActionListener {
                 switch (joc.getTorn()) {
                     case 0:
                         //AQUÍ ESTÁ EL FALLO, NO AÑADE AL ARRAY DE FICHAS JUGADAS
-                        int [] array = new int[2];
+                        int[] array = new int[2];
                         String numeros[] = respuestaBoton.split(",");
                         array[0] = Integer.parseInt(numeros[0]);
                         array[1] = Integer.parseInt(numeros[1]);
                         Fitxa f = new Fitxa(array);
-                        jugada.colocarUnaFitxa(f, juego.orientacionFicha());
-                        System.out.println("Ficha Jugada con éxito");
+                        boolean girar = juego.orientacionFicha();
+                        jugada.colocarUnaFitxa(f, girar);
+                        if (!girar) {
+                            f.canviarOrientacio();
+                        }
+                        juego.actualizarFichaJugador(jugador1, joc.getTorn(), f);
                         break;
                 }
                 joc.actualitzarEstat();
@@ -81,14 +89,18 @@ public class GestionDominoUI implements ActionListener {
         this.juego.imprimirFichasJugadas(joc.getFitxesJugades());
     }
 
+    public ArrayList<Fitxa> getJugador1() {
+        return jugador1;
+    }
+
     public ArrayList<JButton> generarBotones(List<Fitxa> fitxas, int numeroJugador) {
         arrayBotones = new ArrayList();
         if (numeroJugador == 0) {
             for (Fitxa f : fitxas) {
+                jugador1.add(f);
                 JButton b = new JButton();
                 String numeros[] = f.toString().split(",");
-                System.out.print(f.toString());
-                ImageIcon im = new ImageIcon("imagenes\\" + numeros[0]+""+""+numeros[1] + ".gif");
+                ImageIcon im = new ImageIcon("imagenes\\" + numeros[0] + "" + "" + numeros[1] + "v.gif");
                 b.setActionCommand(f.toString());
                 b.addActionListener(this);
                 b.setIcon(im);
@@ -97,14 +109,14 @@ public class GestionDominoUI implements ActionListener {
         } else {
             for (Fitxa f : fitxas) {
                 JButton b = new JButton();
-                System.out.println(f.toString());
-                ImageIcon im = new ImageIcon("imagenes\\back.gif");
+                jugador2.add(f);
+                ImageIcon im = new ImageIcon("imagenes\\backv.gif");
                 b.setActionCommand(f.toString());
                 b.setIcon(im);
                 arrayBotones.add(b);
             }
         }
-
+        System.out.println(jugador1.size() + "holi");
         return arrayBotones;
     }
 
