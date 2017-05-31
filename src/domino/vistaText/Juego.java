@@ -8,13 +8,11 @@ package domino.vistaText;
 import domino.controlText.GestionDominoUI;
 import domino.model.Fitxa;
 import java.awt.BorderLayout;
-import java.awt.Button;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Label;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -82,6 +80,11 @@ public class Juego extends javax.swing.JFrame {
     private void jCheckBoxMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem1ActionPerformed
 
     }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
+    /**
+     * Método que se encarga de generar en un primer momento el tablero, con las
+     * zonas marcadas mediante colores. Se ha seleccionado expresamente el verde
+     * como fondo principal para poder destacar así las fichas que estén jugadas
+     */
     private void configuracio() {
 
         pSud = new JPanel();
@@ -101,7 +104,6 @@ public class Juego extends javax.swing.JFrame {
         Label label1 = new Label(nombreJugadores.get(0));
         Label label2 = new Label(nombreJugadores.get(1));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //this.setLocation(500,500);
         this.setPreferredSize(new Dimension(800, 800));
         //posicio x,y centrada al cetre de la pantalla
         this.setLocationRelativeTo(null);
@@ -119,6 +121,13 @@ public class Juego extends javax.swing.JFrame {
         this.pack();
     }
 
+    /**
+     * Este método se encarga de imprimir los botones en un primer momento, le
+     * llega el turno del jugador y mediante el array generado en el control,
+     * con todos los botones, vamos colocandolos en el tablero
+     *
+     * @param numeroJugador
+     */
     public void imprimirBotones(int numeroJugador) {
         JButton boton;
         ArrayList<JButton> arrayBotones = c.getArrayBotones();
@@ -140,6 +149,7 @@ public class Juego extends javax.swing.JFrame {
                     pnord.add(boton);
                 }
                 break;
+            //Futuras implementaciones, OTROS JUGADORES
             case 2:
                 break;
             case 3:
@@ -148,13 +158,24 @@ public class Juego extends javax.swing.JFrame {
 
     }
 
+    /**
+     * Este método se encarga de actualizar las fichas del mazo, le llega, array
+     * de fichas, turno y ficha jugada, la ficha jugada es básicamente para
+     * eliminarla después del array, entonces, a partir de el array de fichas
+     * genera de nuevo todos los botones, pero esta vez actualizados a la nueva
+     * situación del juego
+     *
+     * @param juego
+     * @param jugador
+     * @param fichaJugada
+     */
     public void actualizarFichaJugador(ArrayList<Fitxa> juego, int jugador, Fitxa fichaJugada) {
 
         JButton pasar = new JButton("PASAR");
         ArrayList<JButton> arrayBotones = c.getArrayBotones();
         switch (jugador) {
             case 0:
-                //TODO FALTA HACER QUE SE ELIMINE FICHAS
+
                 pSud.removeAll();
                 for (int i = 0; i < juego.size(); i++) {
                     JButton b = new JButton();
@@ -173,18 +194,16 @@ public class Juego extends javax.swing.JFrame {
                 pasar.setActionCommand("Pasar");
                 pSud.add(pasar);
                 break;
-            case 1:
-                pnord.removeAll();
-                for (int i = 0; i < arrayBotones.size(); i++) {
-                    JButton boton = arrayBotones.get(i);
-                    pnord.add(boton);
-                }
-                break;
         }
         pSud.updateUI();
         pnord.updateUI();
     }
 
+    /**
+     * Le llega el array de fichas jugadas y las imprime en el tablero de juego
+     *
+     * @param fichasJugadas
+     */
     public void imprimirFichasJugadas(ArrayDeque<Fitxa> fichasJugadas) {
         pCentre.removeAll();
         System.out.println("Fitxes Tauler: ");
@@ -201,6 +220,11 @@ public class Juego extends javax.swing.JFrame {
 
     }
 
+    /**
+     * Muetra un panel de forma temporal para elegir donde colocar la ficha
+     *
+     * @return
+     */
     public boolean orientacionFicha() {
         boolean orienzacion = true;
         Object[] izquierdaDerecha = {"Izquierda",

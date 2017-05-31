@@ -1,0 +1,6 @@
+1. El juego está codificado de tal forma que se jugarán dos jugadores, aun que, está parcialmente implementado para poder
+expandir el juego a más jugadores.
+2. Tiene un pequeño fallo y es que si se coloca una ficha a la izquierda, elimina dos fichas, desconozco el motivo.
+3. En el caso de que empieces y tu mazo no tenga 6-6, cierra el juego y ejecutalo de nuevo.
+4. No está implementada la IA, por lo que el adversario no pondrá fichas.
+5. En el caso de que el turno sea del adversario, haz click a cualquier botón para pasar el turno del adversario.

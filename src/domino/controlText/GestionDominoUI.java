@@ -10,14 +10,12 @@ import domino.model.Joc;
 import domino.model.Jugada;
 import domino.vistaText.Juego;
 import domino.vistaText.Opciones;
-import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -42,6 +40,14 @@ public class GestionDominoUI implements ActionListener {
         jugador2 = new ArrayList();
     }
 
+    /**
+     * Sobreescribimos el método actionPerformed por que implementamos
+     * ActionListener debido a que aquí, desde el control, gestionaremos el
+     * juego entero, en este método, reciviremos las respuestas de todos los
+     * botones del juego
+     *
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         String respuestaBoton = e.getActionCommand();
@@ -63,13 +69,12 @@ public class GestionDominoUI implements ActionListener {
                 }
                 break;
             case "Pasar":
-                System.out.println("PASARRRRRRRRRRRRRRRR");
                 jugada.passar();
                 break;
             default:
                 switch (joc.getTorn()) {
+                    //Turno para jugar yo
                     case 0:
-                        //AQUÍ ESTÁ EL FALLO, NO AÑADE AL ARRAY DE FICHAS JUGADAS
                         int[] array = new int[2];
                         String numeros[] = respuestaBoton.split(",");
                         array[0] = Integer.parseInt(numeros[0]);
@@ -93,9 +98,18 @@ public class GestionDominoUI implements ActionListener {
         return jugador1;
     }
 
+    /**
+     * Este método se encarga de generar, en un primer momento, todos los
+     * botones con las imágenes idoneas para cada botón
+     *
+     * @param fitxas
+     * @param numeroJugador
+     * @return
+     */
     public ArrayList<JButton> generarBotones(List<Fitxa> fitxas, int numeroJugador) {
         arrayBotones = new ArrayList();
         if (numeroJugador == 0) {
+            //Mis botones
             for (Fitxa f : fitxas) {
                 jugador1.add(f);
                 JButton b = new JButton();
@@ -116,7 +130,6 @@ public class GestionDominoUI implements ActionListener {
                 arrayBotones.add(b);
             }
         }
-        System.out.println(jugador1.size() + "holi");
         return arrayBotones;
     }
 
